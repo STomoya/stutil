@@ -12,5 +12,7 @@ setup(
     author_email='stomoya0110@gmail.com',
     url='https://github.com/STomoya/stutil/',
     packages=find_packages(),
-    install_requires=[]
+    install_requires=[
+        'pyyaml',
+    ]
 )
