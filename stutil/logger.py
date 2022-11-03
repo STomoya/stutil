@@ -15,7 +15,16 @@ __all__=[
 
 _stream = None
 
-def open_redirect_std_stream(filename: str=None, mode: str='a'):
+def open_redirect_std_stream(filename: str=None, mode: str='a') -> "RedirectStdStream":
+    """open a stream that redirect stderr to stdout and optionally print to file.
+
+    Args:
+        filename (str, optional): File name to print to. Default: None.
+        mode (str, optional): File writinf mode. Default: 'a'.
+
+    Returns:
+        RedirectStdStream: stream
+    """
     global _stream
     if _stream is None:
         _stream = RedirectStdStream(filename, mode)
@@ -23,6 +32,8 @@ def open_redirect_std_stream(filename: str=None, mode: str='a'):
 
 
 def close_redirect_std_stream():
+    """close the stream opened by "open_redirect_std_stream"
+    """
     global _stream
     if _stream is not None:
         _stream.close()
@@ -31,6 +42,19 @@ def close_redirect_std_stream():
 
 @contextmanager
 def redirect_stds(filename: str=None, mode: str='a'):
+    """Inside this context manager the stderr will be redirected to stdout,
+    and optionally prints the outputs to a file.
+    This stream only lives within the "with" statement.
+
+    Args:
+        filename (str, optional): File name to print to. Default: None.
+        mode (str, optional): File writinf mode. Default: 'a'.
+
+    Examples:
+        >>> with redirect_stds('log.log'):
+        >>>     print('stdout will be saved to "log.log"')
+        >>>     warnings.warn('stderr will also be saved to "log.log"')
+    """
     open_redirect_std_stream(filename, mode)
     yield
     close_redirect_std_stream()
@@ -113,6 +137,11 @@ def get_logger(name: str,
 
     Examples:
         >>> logger = get_logger('logger-name')
+
+        >>> # this should behave equivalent to logging.getLogger('logger-name')
+        >>> # note that other args will be ignored in this situation.
+        >>> get_logger('logger-name') == logger
+        True
     """
     logger = logging.getLogger(name)
 
