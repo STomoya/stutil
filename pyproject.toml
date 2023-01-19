@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stutil"
+license = {file = "LICENSE"}
+description = "Python UTILities for STomoya."
+authors = [
+    {name = "Tomoya Sawada", email = "stomoya0110@gmail.com"}
+]
+readme = "README.md"
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3"
+]
+dependencies = [
+    'pyyaml'
+]
+dynamic = ["version"]
+
+[project.urls]
+source = "https://github.com/STomoya/stutil"
+
+[tool.setuptools.packages.find]
+exclude = ["build", "tests"]
+
+[tool.setuptools.dynamic]
+version = {attr = "stutil.version.__version__"}
