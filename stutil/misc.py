@@ -15,6 +15,8 @@ from argparse import Namespace
 from collections.abc import Iterable
 from typing import Any, Callable
 
+from stutil.timezone import get_jst_timezone
+
 __all__=[
     'check_folder',
     'dynamic_default',
@@ -141,8 +143,17 @@ def recursive_apply(func: Callable, data: Any, cond_fn: Callable) -> Any:
     return data
 
 
-def get_now_string(format: str='%Y%m%d%H%M%S'):
-    return datetime.datetime.now().strftime(format)
+def get_now_string(format: str='%Y%m%d%H%M%S', use_jst: bool=True) -> str:
+    """get datetime.datetime.now() as string.
+
+    Args:
+        format (str, optional): format of the datetime. Default: '%Y%m%d%H%M%S'.
+        use_jst (bool, optional): use jst timezone. Default: True.
+
+    Returns:
+        str: datetime.
+    """
+    return datetime.datetime.now(tz=get_jst_timezone() if use_jst else None).strftime(format)
 
 
 def save_exec_status(path: str='./execstatus.txt', mode: str='a') -> Callable:
