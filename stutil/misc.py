@@ -155,14 +155,14 @@ def get_now_string(format: str='%Y%m%d%H%M%S', use_jst: bool=True) -> str:
     """
     return datetime.datetime.now(tz=get_jst_timezone() if use_jst else None).strftime(format)
 
-
-def save_exec_status(path: str='./execstatus.txt', mode: str='a') -> Callable:
+def save_exec_status(path: str='./execstatus.txt', mode: str='a', use_jst: bool=True) -> Callable:
     """Decorator that saves execution status to a file.
     Useful if you cannot access traceback messages like inside detached docker containers.
 
     Args:
         path (str, optional): File to save the output to.. Default: './execstatus.txt'.
-        mode (str, optional): File open mode. 'w' will overwrite previous outputs.. Default: 'a'.
+        mode (str, optional): File open mode. 'w' will overwrite previous outputs. Default: 'a'.
+        use_jst (bool, optional): Use Japan Standard Time (JST). if False use UCT. Default: True
 
     Raises:
         Exception: Any exeception raised inside the function.
@@ -198,14 +198,14 @@ def save_exec_status(path: str='./execstatus.txt', mode: str='a') -> Callable:
         @functools.wraps(func)
         def inner(*args, **kwargs):
 
-            start_time = datetime.datetime.now()
+            start_time = get_now_string(date_format, use_jst)
             func_name = func.__qualname__
 
             try:
                 retval = func(*args, **kwargs)
 
                 # successful run
-                end_time = datetime.datetime.now()
+                end_time = get_now_string(date_format, use_jst)
                 duration = end_time - start_time
                 message = messgae_format.format(
                     func_name=func_name,
@@ -220,17 +220,18 @@ def save_exec_status(path: str='./execstatus.txt', mode: str='a') -> Callable:
 
             except Exception as ex:
                 # error
-                end_time = datetime.datetime.now()
+                end_time = get_now_string(date_format, use_jst)
                 duration = end_time - start_time
+                tb = traceback.format_exc()
                 message = messgae_format.format(
                     func_name=func_name,
                     status='CRASHED 👿',
                     start_time=start_time.strftime(date_format),
                     end_time=end_time.strftime(date_format),
                     duration=str(duration)
-                ) + \
+                ) \
                 + f'**  ERROR       **: {ex}\n' \
-                + f'**  TRACEBACK   **: \n{traceback.format_exc()}' # add traceback and error message
+                + f'**  TRACEBACK   **: \n{tb}\n' # add traceback and error message
                 _save(message)
 
                 raise ex
