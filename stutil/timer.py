@@ -1,4 +1,5 @@
 """Timer."""
+
 import time
 
 

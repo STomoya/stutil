@@ -1,4 +1,5 @@
 """Stutil."""
+
 import argparse
 
 import stutil
