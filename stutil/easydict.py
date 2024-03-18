@@ -32,6 +32,11 @@ class EasyDict(dict):
     def __setattr__(self, name: str, value: Any) -> None:
         if isinstance(value, dict) and not isinstance(value, type(self)):
             self[name] = type(self)(value)
+        elif isinstance(value, (tuple, list)):
+            new_value = []
+            for v in value:
+                new_value.append(type(self)(v) if isinstance(v, dict) else v)
+            self[name] = type(value)(new_value)
         else:
             self[name] = value
 
