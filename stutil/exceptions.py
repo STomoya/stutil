@@ -17,7 +17,6 @@ def warn_deprecated(name: str, favor_of: str | None = None, recommendation: str 
     """Call warnings.warn for deprecations.
 
     Args:
-    ----
         name (str): name of the deprecated code.
         favor_of (str, optional): reason of deprecation. Default: None.
         recommendation (str, optional): recommendation to use other function. Defaults to None.
@@ -39,22 +38,21 @@ def deprecated(favor_of: str | None = None, recommendation: str | None = None) -
     Decorator to call deprecation warnings when the wrapped callable is called.
 
     Args:
-    ----
         favor_of (str, optional): reason of deprecation. Default: None.
         recommendation (str, optional): recommendation to use other function. Defaults to None.
 
     Returns:
-    -------
         Callable: wrapped callable
 
     Examples:
-    --------
-        >>> @deprecated(favor_of='func_v2', recommendation='func_v2')
-        ... def func_v1(): pass
+        ```
+        @deprecated(favor_of='func_v2', recommendation='func_v2')
+        def func_v1(): pass
 
-        >>> # it can also decorate a class
-        >>> @deprecated(favor_of='Cls_v2', recommendation='Cls_v2')
-        ... class Cls_V1: pass
+        # it can also decorate a class
+        @deprecated(favor_of='Cls_v2', recommendation='Cls_v2')
+        class Cls_V1: pass
+        ```
 
     """
 

@@ -35,16 +35,13 @@ def dynamic_default(value: Any | None, default_value: Any) -> Any:
     """Dynamic default value.
 
     Args:
-    ----
         value (Any | None): A value or None.
         default_value (Any): The default value used when value is None.
 
     Returns:
-    -------
         Any: The selected value depending on the arguments.
 
     """
-    """"""
     return value if value is not None else default_value
 
 
@@ -54,11 +51,9 @@ def prod(iter: Iterable) -> int | float:
     Use math.prod() for python >= 3.8.
 
     Args:
-    ----
         iter (Iterable): An iterable containing numeric values
 
     Returns:
-    -------
         int|float: The calculated product of all elements in the given iterable.
 
     """
@@ -72,7 +67,6 @@ def save_command_args(args: Namespace, filename: str = 'args.json') -> None:
     """Save Namespace object to json file.
 
     Args:
-    ----
         args (Namespace): Parsed command line arguments as an argparse.Namespace object.
         filename (str, optional): Name of the file to save the arguments. Default: 'args.json'
 
@@ -86,12 +80,10 @@ def check_folder(folder: str, make: bool = False) -> bool:
     """Check if a folder exists and create it if not.
 
     Args:
-    ----
         folder (str): The folder to check the existance.
         make (bool, optional): If True, create the folder of not exists. Default: False.
 
     Returns:
-    -------
         bool: A boolean indicating the existance of the folder.
 
     """
@@ -105,13 +97,11 @@ def glob_inside(folder: str, pattern: str = '*', recursive: bool = True) -> list
     """Glob for files/dirs that matches pattern.
 
     Args:
-    ----
         folder (str): Root folder to glob inside.
         pattern (str, optional): Glob pattern. Default: '*'.
         recursive (bool, optional): Whether to recursively glob into child folders. Default: True.
 
     Returns:
-    -------
         list[str]: Lst of glob-ed paths.
 
     """
@@ -127,12 +117,10 @@ def natural_sort(iter: list[str], reverse: bool = False) -> list[str]:
     """Sort files by numbers.
 
     Args:
-    ----
         iter (list[str]): An iterable to sort.
         reverse (bool, optional): Reverse sorting. Default: False
 
     Returns:
-    -------
         list[str]: The sorted iterable.
 
     """
@@ -150,13 +138,11 @@ def recursive_apply(func: Callable, data: Any, cond_fn: Callable) -> Any:
     """Recursively apply func to data that satisfies cond_fn.
 
     Args:
-    ----
         func (Callable): The function to apply
         data (Any): Data to be applied
         cond_fn (Callable): A function that returns a bool, which decides whether to apply the func or not.
 
     Returns:
-    -------
         Any: data, with func applied.
 
     """
@@ -173,12 +159,10 @@ def get_now_string(format: str = '%Y%m%d%H%M%S', use_jst: bool = True) -> str:
     """Get datetime.datetime.now() as string.
 
     Args:
-    ----
         format (str, optional): format of the datetime. Default: '%Y%m%d%H%M%S'.
         use_jst (bool, optional): use jst timezone. Default: True.
 
     Returns:
-    -------
         str: datetime.
 
     """
@@ -191,27 +175,26 @@ def save_exec_status(path: str = './execstatus.txt', mode: str = 'a', use_jst: b
     Useful if you cannot access traceback messages like inside detached docker containers.
 
     Args:
-    ----
         path (str, optional): File to save the output to.. Default: './execstatus.txt'.
         mode (str, optional): File open mode. 'w' will overwrite previous outputs. Default: 'a'.
         use_jst (bool, optional): Use Japan Standard Time (JST). if False use UCT. Default: True
 
     Raises:
-    ------
         Exception: Any exeception raised inside the function.
 
     Returns:
-    -------
         Callable: A decorator which wraps a function to save the execution status.
 
-    Examples::
-        >>> @storch.save_exec_status('./path/to/output.txt', 'a')
-        >>> def hello():
-        >>>     print('hello')
-        >>> # OR
-        >>> def hello():
-        >>>     print('hello')
-        >>> hello = storch.save_exec_status('./path/to/output.txt', 'a')(hello)
+    Examples:
+        ```
+        @storch.save_exec_status('./path/to/output.txt', 'a')
+        def hello():
+            print('hello')
+        # OR
+        def hello():
+            print('hello')
+        hello = storch.save_exec_status('./path/to/output.txt', 'a')(hello)
+        ```
 
     """
     messgae_format = (
@@ -283,7 +266,6 @@ def import_all_modules(root: str, base_module: str) -> None:
     from: https://github.com/facebookresearch/ClassyVision/blob/309d4f12431c6b4d8540010a781dc2aa25fe88e7/classy_vision/generic/registry_utils.py#L14-L20
 
     Args:
-    ----
         root (str): Absolute path to the directory of the module to import.
         base_module (str): Name of the base module.
 

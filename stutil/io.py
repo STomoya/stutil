@@ -14,11 +14,9 @@ def load_json(path: str) -> dict:
     """Load a JSON format file.
 
     Args:
-    ----
         path (str): The JSON file to load.
 
     Returns:
-    -------
         dict: The loaded JSON data.
 
     """
@@ -31,11 +29,9 @@ def load_jsonl(path: str) -> list[dict]:
     """Load a JSONL format file.
 
     Args:
-    ----
         path (str): The JSONL file to load.
 
     Returns:
-    -------
         list[dict]: List of JSON data.
 
     """
@@ -49,7 +45,6 @@ def dump_json(obj: dict, path: str, **kwargs) -> None:
     """Dump a dict in JSON format.
 
     Args:
-    ----
         obj (dict): The dict object to dump
         path (str): The file to dump the object to.
         **kwargs: other kwargs for json.dump.
@@ -63,7 +58,6 @@ def dump_jsonl(obj: list[dict], path: str) -> None:
     """Dump a List of Dict in JSONL format.
 
     Args:
-    ----
         obj (list[dict]): The list of dict objects to dump
         path (str): The file to dump the object to.
 
@@ -77,11 +71,9 @@ def load_yaml(path: str) -> dict:
     """Load a YAML format file.
 
     Args:
-    ----
         path (str): The YAML file to load.
 
     Returns:
-    -------
         dict: The loaded YAML data.
 
     """
@@ -95,7 +87,6 @@ def dump_yaml(obj: dict, path: str, **kwargs) -> None:
     """Dump a dict in YAML format.
 
     Args:
-    ----
         obj (dict): The dict object to dump.
         path (str): The file to dump the object to.
         **kwargs: other kwargs for yaml.dump.
