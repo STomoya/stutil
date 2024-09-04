@@ -17,12 +17,10 @@ def open_redirect_std_stream(filename: str | None = None, mode: str = 'a') -> 'R
     """Open a stream that redirect stderr to stdout and optionally print to file.
 
     Args:
-    ----
         filename (str, optional): File name to print to. Default: None.
         mode (str, optional): File writinf mode. Default: 'a'.
 
     Returns:
-    -------
         RedirectStdStream: stream
 
     """
@@ -47,15 +45,15 @@ def redirect_stds(filename: str | None = None, mode: str = 'a'):
     This stream only lives within the "with" statement.
 
     Args:
-    ----
         filename (str, optional): File name to print to. Default: None.
         mode (str, optional): File writinf mode. Default: 'a'.
 
     Examples:
-    --------
-        >>> with redirect_stds('log.log'):
-        >>>     print('stdout will be saved to "log.log"')
-        >>>     warnings.warn('stderr will also be saved to "log.log"')
+        ```
+        with redirect_stds('log.log'):
+            print('stdout will be saved to "log.log"')
+            warnings.warn('stderr will also be saved to "log.log"')
+        ```
 
     """
     open_redirect_std_stream(filename, mode)
@@ -86,7 +84,6 @@ class RedirectStdStream(object):
         """Write text to stdout (and a file) and optionally flush.
 
         Args:
-        ----
             text (Union[str, bytes]): Text to write.
 
         """
@@ -135,7 +132,6 @@ def get_logger(
     """Create logger.
 
     Args:
-    ----
         name (str): name of the logger. identical to logging.getLogger(name) if already called once with the same name.
         filename (str | None): filename to where the logs are saved. Default: None
         mode (str): write mode of the file. Default: 'a'
@@ -144,17 +140,17 @@ def get_logger(
         auxiliary_handlers (list, optional): Other user-defined handlers. Default: None
 
     Returns:
-    -------
         logging.Logger: logger object.
 
     Examples:
-    --------
-        >>> logger = get_logger('logger-name')
+        ```
+        logger = get_logger('logger-name')
 
-        >>> # this should behave equivalent to logging.getLogger('logger-name')
-        >>> # note that other args will be ignored in this situation.
-        >>> get_logger('logger-name') == logger
-        True
+        # this should behave equivalent to logging.getLogger('logger-name')
+        # note that other args will be ignored in this situation.
+        get_logger('logger-name') == logger
+        # >>> True
+        ```
 
     """
     logger = logging.getLogger(name)

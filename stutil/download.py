@@ -72,7 +72,6 @@ def download_url(url: str, root: str, filename: str | None = None, max_redirect_
     """Download content of a given url. supports google drive with large files.
 
     Args:
-    ----
         url (str): URL.
         root (str): root directory to save the content.
         filename (str, optional): file name of the saved content. If None base name of the url will be used.
@@ -80,7 +79,6 @@ def download_url(url: str, root: str, filename: str | None = None, max_redirect_
         max_redirect_hops (int, optional): maximum redirect hops. Default: 3.
 
     Raises:
-    ------
         OSError: download error.
 
     """
@@ -129,7 +127,6 @@ def download_file_from_google_drive(file_id: str, root: str, filename: Optional[
     """Download a Google Drive file from  and place it in root.
 
     Args:
-    ----
         file_id (str): id of file to be downloaded
         root (str): Directory to place downloaded file in
         filename (str, optional): Name to save the file under. If None, use the id of the file.
