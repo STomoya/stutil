@@ -15,14 +15,12 @@ def send_notify(message: str, image_file: str | None = None, token: str | None =
     """Send notification using LINE notify.
 
     Args:
-    ----
         message (str): The message to send.
         image_file (str | None, optional): path to an image file. Default: None.
         token (str | None, optional): Token. This overwrites the token given by the environment argument.
             Default: None.
 
     Returns:
-    -------
         requests.Response: Response object returned by post.
 
     """

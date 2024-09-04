@@ -80,7 +80,6 @@ def construct_class_by_name(*args: Any, class_name: str | None = None, **kwargs:
     """Find the python class with the given name and constructs it with the given arguments.
 
     Args:
-    ----
         *args: Any
             Positional arguments of the class
         class_name: str

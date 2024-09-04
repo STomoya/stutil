@@ -63,14 +63,12 @@ class Path(str):
         """Call glob.glob on self, and optionally sort the result.
 
         Args:
-        ----
             recursive (bool, optional): If True, recursively glob inside subfolders. Default: False.
             filter_fn (Callable | None, optional): Func to filter the glob-ed result. Default: None.
             sort (bool, optional): If True, sort the result. Default: False.
             sortkey (Callable | None, optional): Func for key argument of sorted(). Default: None.
 
         Returns:
-        -------
             list[Path]: list of glob-ed paths.
 
         """
@@ -88,11 +86,11 @@ class Path(str):
         return os.path.exists(self)
 
     def isdir(self) -> bool:
-        """isdir."""
+        """Isdir."""
         return os.path.isdir(self)
 
     def isfile(self) -> bool:
-        """isfile."""
+        """Isfile."""
         return os.path.isfile(self)
 
     def resolve(self) -> 'Path':
@@ -100,7 +98,7 @@ class Path(str):
         return type(self)(os.path.realpath(os.path.abspath(self)))
 
     def dirname(self) -> 'Path':
-        """dirname."""
+        """Dirname."""
         return type(self)(os.path.dirname(self))
 
     # functions from shutil
@@ -114,29 +112,30 @@ class Folder(object):
     """Class for easily handling paths inside a root directory.
 
     Args:
-    ----
         root (str): root directory.
         identify (bool, optional): make root folder identifiable. Default: False.
         identifier (str, optional): identifier. Default: None.
 
-    Examples::
-        >>> folder = Folder('./checkpoint')
-        >>> print(folder.root) # > './checkpoint'
+    Examples:
+        ```
+        folder = Folder('./checkpoint')
+        print(folder.root) # > './checkpoint'
 
-        >>> # add subfolders
-        >>> folder.add_children(image='subfolder1', model='subfolder2/subsubfolder')
-        >>> # subfolders can be accessed by name like attrs
-        >>> print(folder.image) # > './checkpoint/subfolder1'
-        >>> print(folder.model) # > './checkpoint/subfolder2/subsubfolder'
+        # add subfolders
+        folder.add_children(image='subfolder1', model='subfolder2/subsubfolder')
+        # subfolders can be accessed by name like attrs
+        print(folder.image) # > './checkpoint/subfolder1'
+        print(folder.model) # > './checkpoint/subfolder2/subsubfolder'
 
-        >>> # "/" operator can be used to join file/folder to root/sub folder
-        >>> print(folder.image / 'image.jpg') # > './checkpoint/subfolder1/image.jpg'
+        # "/" operator can be used to join file/folder to root/sub folder
+        print(folder.image / 'image.jpg') # > './checkpoint/subfolder1/image.jpg'
 
-        >>> # make all folders and subfolders if not exists.
-        >>> folder.mkdir()
+        # make all folders and subfolders if not exists.
+        folder.mkdir()
 
-        >>> # list all directories as dict
-        >>> folder.list()
+        # list all directories as dict
+        folder.list()
+        ```
 
     """
 
@@ -156,7 +155,7 @@ class Folder(object):
                 return self._roots[__name]
             return self.__dict__[__name]
         except KeyError:
-            raise AttributeError(__name)  # noqa: B904,TRY200
+            raise AttributeError(__name)  # noqa: B904
 
     def add_children(self, **kwargs) -> None:
         """Add subfolders to root directory."""
@@ -171,8 +170,7 @@ class Folder(object):
     def list(self) -> dict:
         """List all folders as dict.
 
-        Returns
-        -------
+        Returns:
             dict: Listed folders.
 
         """
